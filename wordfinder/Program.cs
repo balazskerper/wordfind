@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace wordfinder
 {
@@ -11,32 +12,48 @@ namespace wordfinder
     {
         static void Main(string[] args)
         {
+            Stopwatch stopper = new Stopwatch();
+            stopper.Start();
             ConcurrentDictionary<string, List<LetterCount>> LetterCountsForWords = new ConcurrentDictionary<string, List<LetterCount>>();
 
             string WordsFilePath = @"/Users/balazskerper/Projects/test_data/words_alpha.txt";
+            char[] Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToLower().ToCharArray();
 
             List<string> words = File.ReadAllLines(WordsFilePath).ToList();
 
             Parallel.ForEach(words, (word) =>
             {
-                LetterCountsForWords.AddOrUpdate(word, GetLetterCountsForWord(word), (Key, Value) => Value);
+                LetterCountsForWords.AddOrUpdate(word, GetLetterCountsForWord(word, Characters), (OldKey, OldValue) => OldValue);
             });
 
-            Console.WriteLine(words.Count);
-            Console.WriteLine(LetterCountsForWords.Count);
+            stopper.Stop();
+            Console.WriteLine($"Processing took {stopper.Elapsed.TotalSeconds}s");
         }
-        public static List<LetterCount> GetLetterCountsForWord(string word)
+
+        public static List<LetterCount> GetLetterCountsForWord(string word, char[] characters)
         {
             List<LetterCount> letterCounts = new List<LetterCount>();
-            //TODO: create logic for getting LetterCounts
+            foreach(char character in characters)
+            {
+                if (word.Any(a => a.Equals(character)))
+                {
+                    letterCounts.Add(new LetterCount(character, (byte)word.Count(c => c.Equals(character))));
+                }
+            }
             return letterCounts;
         }
     }
 
-    struct LetterCount
+    public struct LetterCount
     {
-        char Char { get; set; }
-        byte Count { get; set; }
+        public char Char { get; set; }
+        public byte Count { get; set; }
+
+        public LetterCount(char c, byte count)
+        {
+            Char = c;
+            Count = count;
+        }
     }
 
 
