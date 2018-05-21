@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace wordfind
+namespace wordfinder
 {
     class Program
     {
