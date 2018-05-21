@@ -1,2 +1,2 @@
 # Purpose
-Wordfind is a small program that lets you cheat with scrabble like games
+Wordfinder is a small program that lets you cheat with scrabble like games
