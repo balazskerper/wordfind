@@ -670,11 +670,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/balazskerper/Projects/wordfind/wordfind/wordfind.csproj",
+      "projectUniqueName": "/Users/balazskerper/Projects/wordfind/wordfind.csproj",
       "projectName": "wordfind",
-      "projectPath": "/Users/balazskerper/Projects/wordfind/wordfind/wordfind.csproj",
+      "projectPath": "/Users/balazskerper/Projects/wordfind/wordfind.csproj",
       "packagesPath": "/Users/balazskerper/.nuget/packages/",
-      "outputPath": "/Users/balazskerper/Projects/wordfind/wordfind/obj",
+      "outputPath": "/Users/balazskerper/Projects/wordfind/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
